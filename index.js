@@ -60,18 +60,11 @@ app.get('/lemony/:jumlah', async (req, res) => {
     'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
   })
 
-  if (name === 'demo') {
-    res.set({
-      'cache-control': 'max-age=31536000'
-    })
-    length = 10
-  }
-
   // Send the generated SVG as the result
   const renderSvg = themify.getCountImage({ count: jumlah, theme, length })
   res.send(renderSvg)
 
-  console.log(data, `theme: ${theme}`, `ref: ${req.get('Referrer') || null}`, `ua: ${req.get('User-Agent') || null}`)
+  console.log(`theme: ${theme}`, `ref: ${req.get('Referrer') || null}`, `ua: ${req.get('User-Agent') || null}`)
 })
 
 // JSON record
