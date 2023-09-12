@@ -49,6 +49,31 @@ app.get('/get/@:name', async (req, res) => {
   console.log(data, `theme: ${theme}`, `ref: ${req.get('Referrer') || null}`, `ua: ${req.get('User-Agent') || null}`)
 })
 
+app.get('/lemony/:jumlah', async (req, res) => {
+  const { jumlah } = req.params
+  const { theme = 'moebooru' } = req.query
+  let length = PLACES
+
+  // This helps with GitHub's image cache 
+  res.set({
+    'content-type': 'image/svg+xml',
+    'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
+  })
+
+  if (name === 'demo') {
+    res.set({
+      'cache-control': 'max-age=31536000'
+    })
+    length = 10
+  }
+
+  // Send the generated SVG as the result
+  const renderSvg = themify.getCountImage({ count: jumlah, theme, length })
+  res.send(renderSvg)
+
+  console.log(data, `theme: ${theme}`, `ref: ${req.get('Referrer') || null}`, `ua: ${req.get('User-Agent') || null}`)
+})
+
 // JSON record
 app.get('/record/@:name', async (req, res) => {
   const { name } = req.params
