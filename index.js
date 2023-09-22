@@ -51,8 +51,7 @@ app.get('/get/@:name', async (req, res) => {
 
 app.get('/lemony/:jumlah', async (req, res) => {
   const { jumlah } = req.params
-  const { theme = 'moebooru' } = req.query
-  let length = PLACES
+  const { theme = 'moebooru', length = 7 } = req.query
 
   // This helps with GitHub's image cache 
   res.set({
